@@ -35,7 +35,7 @@ import {
 import "./App.css";
 import NetworkSimulator from "./pages/NetworkSimulator";
 import AttackSimulator from "./pages/AttackSimulator";
-
+import PrivacyDefense from "./pages/PrivacyDefense";
 
 
 const navigation = [
@@ -473,6 +473,10 @@ function AppShell() {
   path="/attacks"
   element={<AttackSimulator />}
 />
+<Route
+  path="/defense"
+  element={<PrivacyDefense />}
+/>
 
   {/* Other research module placeholders */}
   {Object.keys(moduleInfo)
@@ -480,7 +484,8 @@ function AppShell() {
   (path) =>
     path !== "/dashboard" &&
     path !== "/network" &&
-    path !== "/attacks"
+     path !== "/attacks" &&
+    path !== "/defense"
 )
     .map((path) => (
       <Route

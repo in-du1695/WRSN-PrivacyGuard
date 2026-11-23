@@ -103,9 +103,14 @@ function calculateError(actual, estimated) {
 
 export default function AttackSimulator() {
   const [nodes] = useState(() => loadData("wrsn-nodes"));
-  const [observations] = useState(() =>
-    loadData("wrsn-observations")
-  );
+  const [dataSource, setDataSource] = useState(
+  "wrsn-observations"
+);
+
+const observations = useMemo(
+  () => loadData(dataSource),
+  [dataSource]
+);
   const [selectedId, setSelectedId] = useState("");
   const [attack, setAttack] = useState("lsm");
 
@@ -169,7 +174,21 @@ export default function AttackSimulator() {
             ))}
           </select>
         </div>
+         <div>
+    <label>Observation dataset</label>
+    <select
+      value={dataSource}
+      onChange={(e) => setDataSource(e.target.value)}
+    >
+      <option value="wrsn-observations">
+        Original observations
+      </option>
 
+      <option value="wrsn-protected-observations">
+        Protected observations
+      </option>
+    </select>
+  </div>
         <div>
           <label htmlFor="attack-select">Attack algorithm</label>
           <select

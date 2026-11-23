@@ -1,0 +1,240 @@
+
+.defense-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: #e8edf7;
+}
+
+.defense-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.defense-header h1 {
+  font-size: 29px;
+  margin: 10px 0;
+}
+
+.defense-header p,
+.defense-panel > p {
+  color: #91a2b9;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.defense-eyebrow {
+  color: #36d6c7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.defense-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #36d6c7;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.defense-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.defense-card,
+.defense-panel {
+  background: #101a29;
+  border: 1px solid #223146;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.defense-card svg {
+  color: #36d6c7;
+  width: 22px;
+  height: 22px;
+  margin-bottom: 12px;
+}
+
+.defense-card span {
+  display: block;
+  color: #91a2b9;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.defense-card strong {
+  font-size: 22px;
+}
+
+.defense-panel h2 {
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.protection-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.protection-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: #172538;
+  border: 1px solid #34465d;
+  border-radius: 9px;
+  color: white;
+  padding: 18px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.protection-option svg {
+  color: #8ca2ba;
+}
+
+.protection-option strong {
+  font-size: 15px;
+}
+
+.protection-option span {
+  color: #91a2b9;
+  font-size: 11px;
+}
+
+.protection-option.selected {
+  border-color: #22d3c5;
+  background: #123139;
+}
+
+.protection-option.selected svg {
+  color: #36d6c7;
+}
+
+.defense-settings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.defense-settings > div {
+  background: #172538;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.defense-settings span {
+  display: block;
+  font-size: 11px;
+  color: #91a2b9;
+  margin-bottom: 8px;
+}
+
+.defense-settings strong {
+  font-size: 14px;
+  color: #36d6c7;
+}
+
+.defense-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.defense-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.activate-defense {
+  background: #16a394;
+  color: white;
+  border: none;
+}
+
+.clear-defense {
+  background: #172538;
+  border: 1px solid #34465d;
+  color: white;
+}
+
+.defense-message {
+  margin-top: 15px;
+  padding: 12px;
+  background: #123139;
+  color: #5ce5d5;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.mechanism-row {
+  display: flex;
+  gap: 14px;
+  padding: 17px 0;
+  border-bottom: 1px solid #263448;
+}
+
+.mechanism-row:last-child {
+  border-bottom: none;
+}
+
+.mechanism-row svg {
+  color: #36d6c7;
+  flex-shrink: 0;
+}
+
+.mechanism-row strong {
+  font-size: 13px;
+}
+
+.mechanism-row p {
+  color: #91a2b9;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+.defense-disclaimer {
+  color: #8495aa;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .defense-overview,
+  .protection-options,
+  .defense-settings {
+    grid-template-columns: 1fr;
+  }
+
+  .defense-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .defense-header h1 {
+    font-size: 24px;
+  }
+}
