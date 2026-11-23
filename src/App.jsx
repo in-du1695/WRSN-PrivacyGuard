@@ -33,6 +33,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./App.css";
+import NetworkSimulator from "./pages/NetworkSimulator";
 
 const navigation = [
   {
@@ -454,17 +455,34 @@ function AppShell() {
       <div className="main-area">
         <Topbar onMenu={() => setMobileOpen(true)} />
         <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            {Object.keys(moduleInfo).filter((path) => path !== "/dashboard").map((path) => (
-              <Route
-                key={path}
-                path={path}
-                element={<PlaceholderPage path={path} />}
-              />
-            ))}
-          </Routes>
+          
+<Routes>
+  <Route path="/" element={<HomePage />} />
+
+  <Route path="/dashboard" element={<DashboardPage />} />
+
+  {/* Functional Network Simulator */}
+  <Route
+    path="/network"
+    element={<NetworkSimulator />}
+  />
+
+  {/* Other research module placeholders */}
+  {Object.keys(moduleInfo)
+    .filter(
+      (path) =>
+        path !== "/dashboard" &&
+        path !== "/network"
+    )
+    .map((path) => (
+      <Route
+        key={path}
+        path={path}
+        element={<PlaceholderPage path={path} />}
+      />
+    ))}
+</Routes>
+
         </main>
         <footer className="app-footer">
           <span>WRSN PrivacyGuard © 2026</span>
