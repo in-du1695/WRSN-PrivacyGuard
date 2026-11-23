@@ -39,11 +39,36 @@ export default function NetworkSimulator() {
   const [tick, setTick] = useState(0);
   const [energyDelivered, setEnergyDelivered] = useState(0);
 
+  const [observations, setObservations] = useState(() => {
+  try {
+    return JSON.parse(
+      localStorage.getItem("wrsn-observations") || "[]"
+    );
+  } catch {
+    return [];
+  }
+});
+
   const charger = useMemo(
     () => getChargerPosition(tick),
     [tick]
   );
 
+  
+  // Save network data for other modules
+  useEffect(() => {
+    localStorage.setItem(
+      "wrsn-observations",
+      JSON.stringify(observations)
+    );
+
+    localStorage.setItem(
+      "wrsn-nodes",
+      JSON.stringify(nodes)
+    );
+  }, [observations, nodes]);
+
+  // Network simulation and charging observations
   useEffect(() => {
     if (!running) return;
 
@@ -51,6 +76,31 @@ export default function NetworkSimulator() {
       const nextTick = tick + 1;
       const nextCharger = getChargerPosition(nextTick);
 
+      // Record charging observations
+      const currentObservations = nodes.map((node) => {
+        const dx = node.x - nextCharger.x;
+        const dy = node.y - nextCharger.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        const power =
+          distance < 220
+            ? 2.5 * (1 - distance / 220)
+            : 0;
+
+        return {
+          sensorId: node.id,
+          chargerX: nextCharger.x,
+          chargerY: nextCharger.y,
+          power,
+          step: nextTick,
+        };
+      });
+
+      setObservations((previous) =>
+        [...previous, ...currentObservations].slice(-10000)
+      );
+
+      // Update sensor battery levels
       setNodes((previousNodes) =>
         previousNodes.map((node) => {
           const dx = node.x - nextCharger.x;
@@ -81,9 +131,11 @@ export default function NetworkSimulator() {
         })
       );
 
+      // Calculate energy delivered
       const nearbyNodes = nodes.filter((node) => {
         const dx = node.x - nextCharger.x;
         const dy = node.y - nextCharger.y;
+
         return Math.sqrt(dx * dx + dy * dy) < 220;
       });
 
@@ -96,6 +148,7 @@ export default function NetworkSimulator() {
 
     return () => clearInterval(timer);
   }, [running, tick, nodes]);
+
 
   const averageBattery =
     nodes.reduce((sum, node) => sum + node.battery, 0) /
@@ -113,6 +166,7 @@ export default function NetworkSimulator() {
     setRunning(false);
     setTick(0);
     setEnergyDelivered(0);
+    setObservations([]);
     setNodes(generateNodes(nodeCount));
   }
 
@@ -122,6 +176,7 @@ export default function NetworkSimulator() {
     setRunning(false);
     setTick(0);
     setEnergyDelivered(0);
+    setObservations([]);
     setNodes(generateNodes(count));
   }
 

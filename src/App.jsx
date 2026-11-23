@@ -34,6 +34,9 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import NetworkSimulator from "./pages/NetworkSimulator";
+import AttackSimulator from "./pages/AttackSimulator";
+
+
 
 const navigation = [
   {
@@ -466,14 +469,19 @@ function AppShell() {
     path="/network"
     element={<NetworkSimulator />}
   />
+  <Route
+  path="/attacks"
+  element={<AttackSimulator />}
+/>
 
   {/* Other research module placeholders */}
   {Object.keys(moduleInfo)
     .filter(
-      (path) =>
-        path !== "/dashboard" &&
-        path !== "/network"
-    )
+  (path) =>
+    path !== "/dashboard" &&
+    path !== "/network" &&
+    path !== "/attacks"
+)
     .map((path) => (
       <Route
         key={path}
